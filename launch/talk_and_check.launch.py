@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2025 Raito Kaneko
+# SPDX-License-Identifier: BSD-3-Clause
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
