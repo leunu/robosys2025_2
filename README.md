@@ -1,22 +1,53 @@
-# mypkg - 文末表現解析パッケージ
+# mypkg - 文末表現チェックツール
 
-[![test](https://github.com/leunu/robosys2025_2/actions/workflows/test.yml/badge.svg)](https://github.com/leunu/robosys2025_2/actions/workflows/test.yml)
+![test](https://github.com/leunu/robosys2025_2/actions/workflows/test.yml/badge.svg)
 
-このパッケージは、ROS 2を用いてテキスト内の文末表現（「と思いました。」等）をリアルタイムに解析するシステムです。
+このプログラムは、レポートや感想文の中で「〜と思いました。」といった同じ表現を使いすぎていないか、自動でチェックするためのツールです。
 
-## ノードとトピックの説明
-### 1. text_source ノード
-- **役割**: 解析対象となる文章を一定周期で配信します。
-- **配信トピック**: `/raw_text` [std_msgs/String]
+## 何ができるのか
+2つのプログラムが協力して動きます。
+1. **文章を送る係**: チェックしたい文章を一定時間（3秒）おきに送信します。
+2. **数える係**: 送られてきた文章を受け取って、「〜と思いました。」などの言葉が何回使われているか集計し、結果を表示します。
 
-### 2. style_checker ノード
-- **役割**: 受信した文章の文末表現をカウントし、結果を配信します。
-- **購読トピック**: `/raw_text` [std_msgs/String]
-- **配信トピック**: `/check_result` [std_msgs/String]
+## 使い方
 
-## 実行方法
-以下のローンチファイルを使用することで、両方のノードを同時に起動できます。
+### 1. 準備
+以下のコマンドをコピーして貼り付け、エンターキーを押してください。プログラムを使える状態にします。
+\`\`\`bash
+cd ~/ros2_ws
+colcon build --packages-select mypkg
+source install/setup.bash
+\`\`\`
 
-```bash
+### 2. 実行
+準備ができたら、以下のコマンドを貼り付けて実行してください。
+
+\`\`\`bash
 ros2 launch mypkg talk_and_check.launch.py
-E0F
+\`\`\`
+
+### 3. 動いている時の画面（実行例）
+実行すると、画面に以下のような結果が次々と出てきます。これが確認できれば成功です。
+
+\`\`\`plaintext
+[style_checker-2] [INFO]: Analyzed: {'と思いました。': 1, 'と考えました。': 1, 'と感じました。': 0, 'と受け止めました。': 0}
+\`\`\`
+
+※ 止めたい時は、キーボードの Ctrl キーを押しながら C を押してください。
+
+## 専門的な仕組み（ROS 2の構成）
+内部では以下の名前でデータがやり取りされています。
+- 文章を送る側 (text_source): `/raw_text` に文章データを流します
+- 数える側 (style_checker): `/raw_text` を受け取り、結果を `/check_result` に出力します
+
+## 必要な環境
+- ROS 2 Humble (Ubuntu 22.04)
+
+## テストの結果
+GitHub Actions を使って、ビルドできることを自動で確認しています。
+
+## 著作権・ライセンス
+- このソフトウェアは、3条項BSDライセンスの下で公開されています。
+- © 2025 Raito Kaneko
+- このプログラムの一部は、上田隆一先生のスライド資料を参考に作成しました。
+  - 参考資料：ryuichiueda/my_slides robosys_2025
