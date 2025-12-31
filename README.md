@@ -22,18 +22,15 @@ source install/setup.bash
 ### 2. 実行
 準備ができたら、以下のコマンドを貼り付けて実行してください。
 
-\`\`\`bash
 ros2 launch mypkg talk_and_check.launch.py
-\`\`\`
+
 
 ### 3. 動いている時の画面（実行例）
 実行すると、画面に以下のような結果が次々と出てきます。これが確認できれば成功です。
 
-\`\`\`plaintext
-[style_checker-2] [INFO]: Analyzed: {'と思いました。': 1, 'と考えました。': 1, 'と感じました。': 0, 'と受け止めました。': 0}
-\`\`\`
 
-※ 止めたい時は、キーボードの Ctrl キーを押しながら C を押してください。
+[style_checker-2] [INFO]: Analyzed: {'と思いました。': 1, 'と考えました。': 1, 'と感じました。': 0, 'と受け止めました。': 0}
+
 
 ## 専門的な仕組み（ROS 2の構成）
 内部では以下の名前でデータがやり取りされています。
@@ -50,4 +47,4 @@ GitHub Actions を使って、ビルドできることを自動で確認して�
 - このソフトウェアは、3条項BSDライセンスの下で公開されています。
 - © 2025 Raito Kaneko
 - このプログラムの一部は、上田隆一先生のスライド資料を参考に作成しました。
-  - 参考資料：ryuichiueda/my_slides robosys_2025
+  - 参考資料：https://github.com/ryuichiueda/my_slides/tree/main/robosys_2025
