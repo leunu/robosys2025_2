@@ -13,11 +13,11 @@
 
 ### 1. 準備
 以下のコマンドをコピーして貼り付け、エンターキーを押してください。プログラムを使える状態にします。
-\`\`\`bash
+\\\bash
 cd ~/ros2_ws
 colcon build --packages-select mypkg
 source install/setup.bash
-\`\`\`
+\\\
 
 ### 2. 実行
 準備ができたら、以下のコマンドを貼り付けて実行してください。
